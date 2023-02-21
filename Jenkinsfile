@@ -26,19 +26,19 @@ pipeline{
         echo "Artifact upload start-----------"
         nexusArtifactUploader artifacts: [
                                             [
-                                              artifactId: 'funds', 
+                                              artifactId: "${pom.artifactId}", 
                                               classifier: '', 
-                                              file: '/root/.jenkins/workspace/icici-nexus/target/funds-1.0-SNAPSHOT.war', 
-                                              type: 'war'
+                                              file: "target/${pom.artifactId}-${pom.version}.${pom.packaging}", 
+                                              type: "${pom.packaging}"
                                             ]
                                           ], 
                               credentialsId: 'nexus-creds', 
-                              groupId: 'icic', 
+                              groupId: "${pom.groupId}", 
                               nexusUrl: '65.2.175.145:8081/repository/maven-nexus-artifacts/', 
                               nexusVersion: 'nexus3', 
                               protocol: 'http', 
                               repository: 'maven-nexus-artifacts', 
-                              version: '1.0-SNAPSHOT'
+                              version: "${pom.version}"
         
         echo "Artifact uploaded -------------"
       }
