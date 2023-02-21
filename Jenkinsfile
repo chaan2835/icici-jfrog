@@ -28,7 +28,7 @@ pipeline{
                               nexusUrl: 'http://65.2.175.145:8081/', 
                               nexusVersion: 'nexus3',
                               protocol: 'http', 
-                              repository: 'icici-build-sonartest-docker',
+                              repository: 'icici-nexus',
                               version: '1.0'
       }
     }
