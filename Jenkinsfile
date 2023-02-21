@@ -36,7 +36,7 @@ pipeline{
                             nexusVersion: 'nexus3', 
                             protocol: 'http', 
                             repository: 'maven-nexus-artifacts', 
-                            version: '1.0-SNAPSHOT'
+                            version: '1.${BILD_NUMBER}-SNAPSHOT'
         
         echo "Artifact uploaded -------------"
       }
