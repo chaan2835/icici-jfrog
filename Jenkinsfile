@@ -14,6 +14,24 @@ pipeline{
           sh "mvn clean package"
       }
     }
+    stage("nexus-artifact-upload"){
+      steps{
+        nexusArtifactUploader artifacts: [
+                                            [
+                                              artifactId: 'funds', classifier: '', 
+                                              file: 'target/funds-1.0-SNAPSHOT.war', 
+                                              type: 'war'
+                                            ]
+                                          ],
+                              credentialsId: 'nexus-creds', 
+                              groupId: 'icic', 
+                              nexusUrl: 'http://65.2.175.145:8081/', 
+                              nexusVersion: 'nexus3',
+                              protocol: 'http', 
+                              repository: 'icici-build-sonartest-docker',
+                              version: '1.0'
+      }
+    }
     /*stage("jfrog"){
       steps{
         withCredentials([usernamePassword(credentialsId: 'jfrog-creds', passwordVariable: 'Chandra@2835', usernameVariable: 'jenkins')]) {
