@@ -14,7 +14,7 @@ pipeline{
           sh "mvn clean package"
       }
     }
-    stage("jfrog"){
+    /*stage("jfrog"){
       steps{
         withCredentials([usernamePassword(credentialsId: 'jfrog-creds', passwordVariable: 'Chandra@2835', usernameVariable: 'jenkins')]) {
              echo "jfrog stage"
@@ -22,7 +22,7 @@ pipeline{
         }
       }
     }
-    /*stage("sonar-code-analysis"){
+    stage("sonar-code-analysis"){
       steps{
         script{
             withSonarQubeEnv(credentialsId: 'sonar-token') {
