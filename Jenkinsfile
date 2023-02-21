@@ -21,6 +21,28 @@ pipeline{
         echo "file exists"
       }
     }
+    stage("Nexus Artifact upload"){
+      steps{
+        echo "Artifact upload start-----------"
+        nexusArtifactUploader artifacts: [
+                                            [
+                                              artifactId: 'funds', 
+                                              classifier: '', 
+                                              file: '/root/.jenkins/workspace/icici-nexus/target/funds-1.0-SNAPSHOT.war', 
+                                              type: 'war'
+                                            ]
+                                          ], 
+                              credentialsId: 'nexus-creds', 
+                              groupId: 'icic', 
+                              nexusUrl: '65.2.175.145:8081/repository/maven-nexus-artifacts/', 
+                              nexusVersion: 'nexus3', 
+                              protocol: 'http', 
+                              repository: 'maven-nexus-artifacts', 
+                              version: '1.0-SNAPSHOT'
+        
+        echo "Artifact uploaded -------------"
+      }
+    }
     /*stage("jfrog"){
       steps{
         withCredentials([usernamePassword(credentialsId: 'jfrog-creds', passwordVariable: 'Chandra@2835', usernameVariable: 'jenkins')]) {
