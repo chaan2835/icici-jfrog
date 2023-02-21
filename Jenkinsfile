@@ -14,22 +14,11 @@ pipeline{
           sh "mvn clean package"
       }
     }
-    stage("nexus-artifact-upload"){
+    stage("Artifact exists"){
       steps{
-        nexusArtifactUploader artifacts: [
-                                            [
-                                              artifactId: 'funds', classifier: '', 
-                                              file: 'target/funds-1.0-SNAPSHOT.war', 
-                                              type: 'war'
-                                            ]
-                                          ],
-                              credentialsId: 'nexus-creds', 
-                              groupId: 'icic', 
-                              nexusUrl: 'http://65.2.175.145:8081/', 
-                              nexusVersion: 'nexus3',
-                              protocol: 'http', 
-                              repository: 'icici-nexus',
-                              version: '1.0'
+        echo "checking the file in workspace"
+        fileExists '/root/.jenkins/workspace/icici-nexus/target/funds-1.0-SNAPSHOT.war'      
+        echo "file exists"
       }
     }
     /*stage("jfrog"){
